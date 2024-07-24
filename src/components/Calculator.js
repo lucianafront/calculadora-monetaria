@@ -1,3 +1,4 @@
+
 // src/components/Calculator.js
 import React, { useState, useContext } from 'react';
 import { CurrencyContext } from '../context/CurrencyContext';
@@ -5,7 +6,8 @@ import { CurrencyContext } from '../context/CurrencyContext';
 const Calculator = () => {
   const { rates, addHistory } = useContext(CurrencyContext);
   const [amount, setAmount] = useState(0);
-  const [currency, setCurrency] = useState('USD');
+  const [currency, setCurrency] = useState('BRL');
+  const [currencyDestino, setCurrencyDestino] = useState('USD');
   const [result, setResult] = useState(null);
 
   const handleCalculation = () => {
@@ -21,10 +23,20 @@ const Calculator = () => {
     <div>
       <h1>Calculadora Monetária</h1>
       <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} />
+      <label>Moeda origem</label>
       <select value={currency} onChange={(e) => setCurrency(e.target.value)}>
         {Object.keys(rates).map((currency) => (
           <option key={currency} value={currency}>
             {currency}
+          </option>
+        ))}
+      </select>
+
+      <label>Moeda destino</label>
+      <select value={currencyDestino} onChange={(e) => setCurrency(e.target.value)}>
+        {Object.keys(rates).map((currencyDestino) => (
+          <option key={currencyDestino} value={currencyDestino}>
+            {currencyDestino}
           </option>
         ))}
       </select>
