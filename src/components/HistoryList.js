@@ -4,18 +4,29 @@ import React, { useContext } from 'react';
 import { CurrencyContext } from '../context/CurrencyContext';
 
 const HistoryList = () => {
-  const { history } = useContext(CurrencyContext);
+  const { history, erros } = useContext(CurrencyContext);
 
   return (
-    <div>
+    <div id="historico">
       <h2>Histórico de Cálculos</h2>
       <ul>
         {history.map((item, index) => (
           <li key={index}>
-            {item.amount} USD para {item.currency}: {item.calculation.toFixed(2)}
+            {item.amount} {item.currency} para {item.currencyDestino}: {item.result.toFixed(8)}
           </li>
         ))}
       </ul>
+     
+{/* 
+        <h2>Histórico de Cálculos</h2>
+      <ul>
+        {erros.map((item, index) => (
+          <li key={index}>
+            {item}
+          </li>
+        ))}
+      </ul> */}
+
     </div>
   );
 };

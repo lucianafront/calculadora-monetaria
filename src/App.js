@@ -3,14 +3,16 @@ import React from 'react';
 import { CurrencyProvider } from './context/CurrencyContext';
 import Calculator from './components/Calculator';
 import HistoryList from './components/HistoryList';
+import Erros from './components/Erros';
 
 const App = () => {
   return (
     <CurrencyProvider>
-      <div>
-        <Calculator />
+  
+       <Calculator ></Calculator>
         <HistoryList />
-      </div>
+
+      
     </CurrencyProvider>
   );
 };

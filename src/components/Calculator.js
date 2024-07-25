@@ -1,47 +1,29 @@
 
 // src/components/Calculator.js
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { CurrencyContext } from '../context/CurrencyContext';
+import OptionList from './OptionList';
+
 
 const Calculator = () => {
-  const { rates, addHistory } = useContext(CurrencyContext);
-  const [amount, setAmount] = useState(0);
-  const [currency, setCurrency] = useState('BRL');
-  const [currencyDestino, setCurrencyDestino] = useState('USD');
-  const [result, setResult] = useState(null);
-
-  const handleCalculation = () => {
-    const rate = rates[currency];
-    if (rate) {
-      const calculation = amount * rate;
-      setResult(calculation);
-      addHistory({ amount, currency, calculation });
-    }
-  };
+  const { rates, amount, setAmount, currency, setCurrency, currencyDestino, setCurrencyDestino, calcular, result  } = useContext(CurrencyContext);
 
   return (
-    <div>
+    <div id="calculator" className='imput-field'>
       <h1>Calculadora Monetária</h1>
-      <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} />
+      <input type="number" value={amount} min="1" onChange={(e) => setAmount(e.target.value)} />
       <label>Moeda origem</label>
       <select value={currency} onChange={(e) => setCurrency(e.target.value)}>
-        {Object.keys(rates).map((currency) => (
-          <option key={currency} value={currency}>
-            {currency}
-          </option>
-        ))}
+      <OptionList rates={rates} />
       </select>
 
       <label>Moeda destino</label>
-      <select value={currencyDestino} onChange={(e) => setCurrency(e.target.value)}>
-        {Object.keys(rates).map((currencyDestino) => (
-          <option key={currencyDestino} value={currencyDestino}>
-            {currencyDestino}
-          </option>
-        ))}
+      <select value={currencyDestino} onChange={(e) => setCurrencyDestino(e.target.value)}>
+      <OptionList rates={rates} />
       </select>
-      <button onClick={handleCalculation}>Calcular</button>
-      {result && <div>Resultado: {result.toFixed(2)}</div>}
+      <button onClick={calcular}id="calculater" >Calcular</button>
+      {result && <div>Resultado: {result.toFixed(8)}</div>}
+   
     </div>
   );
 };
