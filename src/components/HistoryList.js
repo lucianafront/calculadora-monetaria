@@ -12,11 +12,10 @@ const HistoryList = () => {
       <ul>
         {history.map((item, index) => (
           <li key={index}>
-            {item.amount} {item.currency} para {item.currencyDestino}: {item.result.toFixed(8)}
+            {item.amount} {item.currency} para {item.currencyDestino}: { item.result !== undefined ?item.result.toFixed(8) : "Erro"} 
           </li>
         ))}
       </ul>
-     
 {/* 
         <h2>Histórico de Cálculos</h2>
       <ul>
